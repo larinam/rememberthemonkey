@@ -15,15 +15,17 @@
 # limitations under the License.
 #
 
-
+from google.appengine.ext.webapp import template
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
-
+import os
 
 class MainHandler(webapp.RequestHandler):
 
   def get(self):
-    self.response.out.write('Hello world!')
+    template_values={'context_text':'this is context text'}
+    path = os.path.join(os.path.dirname(__file__), 'templates', 'index.html')
+    self.response.out.write(template.render(path, template_values))
 
 
 def main():
